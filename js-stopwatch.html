@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       *{
+           text-align: center;
+           
+       }
+
+
+        #displaytime{
+                font-size: 40px;
+                color: white;
+               
+        }
+
+button{
+    font-size: 15px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 50px;
+    color: red;
+    background-color: brown;
+}
+
+.parent{
+    border: 1px solid black;
+    background-color: black;
+    height: 150px;
+    width: 20%;
+    margin: auto ;
+}
+
+
+    </style>
+</head>
+<body>
+  
+    <div class="parent"> 
+    <div id = "displaytime">00:00:00</div>
+    <button onclick="start()">start</button>
+    <button onclick="pause()">pause</button>
+    <button onclick="reset()">reset</button>
+
+   </div>
+</body>
+
+
+<script>
+
+let [seconds, minutes, hours] =[0,0,0];
+let displaytime = document.getElementById("displaytime")
+let timer = null;
+
+
+
+function stopwatch(){
+
+seconds++
+if(seconds == 60)
+{
+    seconds = 0;
+    minutes++;
+    if(minutes == 60)
+    {
+        minutes = 0
+        hours++
+    }
+}
+
+let h = hours <10 ? "0" + hours : hours;
+let m = minutes <10 ? "0" + minutes : minutes;
+let s = seconds <10 ? "0" + seconds : seconds;
+
+displaytime.innerHTML = h+ ":"+ m +":"+ s;
+/*function pause(){
+
+     clearInterval(timer);
+     timer = undefined;
+}*/
+
+displaytime.innerHTML = hours+ ":" + minutes+":"+ seconds;
+
+}
+
+function start(){
+
+    if (
+        timer!= null
+    )
+    {
+        clearInterval(timer)
+    }
+ timer = setInterval(stopwatch,1000);
+}
+
+
+function pause(){
+ clearInterval(timer);
+
+}
+
+function reset(){
+ clearInterval(timer);
+ [seconds, minutes, hours] =[0,0,0];
+ displaytime.innerHTML = "00:00:00";
+
+}
+
+</script>
+</html>
